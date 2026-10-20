@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: omni-product-catalog
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:7434/omni-product-catalog
+    username: postgres
+    password: postgres
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+server:
+  port: 8080

@@ -1,0 +1,22 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name:  omni-product-catalog
+
+    environment:
+      POSTGRES_DB:  omni-product-catalog
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "7434:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
+
+volumes:
+  postgres_data:
