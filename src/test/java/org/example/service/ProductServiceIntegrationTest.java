@@ -1,13 +1,10 @@
 package org.example.service;
 
-import net.bytebuddy.utility.dispatcher.JavaDispatcher;
 import org.example.dto.CreateProductRequest;
 import org.example.dto.UpdateProductRequest;
-import org.example.model.Product;
 import org.example.model.ProductType;
 import org.example.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +15,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import reactor.test.StepVerifier;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -63,8 +60,8 @@ public class ProductServiceIntegrationTest {
 
     @Test
     void shouldCreateProductAndReadItFromDatabase(){
-        CreateProductRequest request = new CreateProductRequest(ProductType.LOAN, "Вклад", "Накопительный вклад", LocalDate.of(2026, 1, 15),
-                null);
+        CreateProductRequest request = new CreateProductRequest(ProductType.LOAN, "Вклад", "Накопительный вклад",
+                Instant.parse("2026-02-01T00:00:00Z"), null);
 
 
         StepVerifier.create(productService.create(request)
@@ -83,11 +80,11 @@ public class ProductServiceIntegrationTest {
 
     @Test
     void shouldUpdateProductInDatabase() {
-        CreateProductRequest createRequest = new CreateProductRequest(ProductType.CARD, "Дебетовая карта", "Старая версия", LocalDate.of(2026, 2, 1),
-                        null);
+        CreateProductRequest createRequest = new CreateProductRequest(ProductType.CARD, "Дебетовая карта", "Старая версия",
+                Instant.parse("2026-02-01T00:00:00Z"), null);
 
-        UpdateProductRequest updateRequest = new UpdateProductRequest(ProductType.CARD, "Премиальная карта", "Обновлённое описание", LocalDate.of(2026, 2, 1),
-                        null);
+        UpdateProductRequest updateRequest = new UpdateProductRequest(ProductType.CARD, "Премиальная карта", "Обновлённое описание",
+                Instant.parse("2026-03-01T00:00:00Z"), null);
 
         StepVerifier.create(productService.create(createRequest)
                                 .flatMap(created -> productService.update(created.id(), updateRequest))

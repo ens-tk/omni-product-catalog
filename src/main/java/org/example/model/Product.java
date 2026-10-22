@@ -1,6 +1,6 @@
 package org.example.model;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.UUID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
@@ -12,6 +12,6 @@ public record Product (
         ProductType type,
         String name,
         String description,
-        LocalDate openDate,
-        LocalDate closeDate
+        Instant openDate,
+        Instant closeDate
 ){}

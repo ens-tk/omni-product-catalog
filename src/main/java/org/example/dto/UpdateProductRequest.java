@@ -2,14 +2,14 @@ package org.example.dto;
 
 import org.example.model.ProductType;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
 public record UpdateProductRequest(
         ProductType type,
         String name,
         String description,
-        LocalDate openDate,
-        LocalDate closeDate
+        Instant openDate,
+        Instant closeDate
 ) {
 
 }

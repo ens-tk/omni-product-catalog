@@ -9,7 +9,7 @@ import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -31,7 +31,7 @@ public class ProductServiceTest {
     @Test
     void shouldReturnProductWhenExists(){
         UUID id = UUID.randomUUID();
-        Product mockProduct = new Product(id, ProductType.LOAN, "Вклад", "Накопительный вклад", LocalDate.of(2026, 1, 15),
+        Product mockProduct = new Product(id, ProductType.LOAN, "Вклад", "Накопительный вклад", Instant.parse("2026-02-01T00:00:00Z"),
                 null);
 
         when(productRepository.findById(id)).thenReturn(Mono.just(mockProduct));
@@ -58,7 +58,7 @@ public class ProductServiceTest {
     void shouldDeleteProductWhenExists() {
         UUID id = UUID.randomUUID();
 
-        Product product = new Product(id, ProductType.CARD, "Дебетовая карта", "Карточный продукт", LocalDate.of(2026, 2, 1),
+        Product product = new Product(id, ProductType.CARD, "Дебетовая карта", "Карточный продукт", Instant.parse("2026-02-01T00:00:00Z"),
                 null);
 
         when(productRepository.findById(id)).thenReturn(Mono.just(product));

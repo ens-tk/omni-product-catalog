@@ -1,14 +1,50 @@
 spring:
   application:
     name: omni-product-catalog
-
+  config:
+    import: "optional:file:.env[.properties]"
   r2dbc:
     url: r2dbc:postgresql://localhost:7434/omni-product-catalog
-    username: postgres
-    password: postgres
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
 
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
     enabled: true
 server:
   port: 8080
+
+product:
+  cache:
+    ttl-millis: 30000
+    max-size: 10000
+  timeout:
+    create-millis: 10000
+    update-millis: 10000
+    get-millis: 10000
+    delete-millis: 10000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info, metrics
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  java:
+    enabled: true
+  os:
+    enabled: true
+  build:
+    enabled: true
+  git:
+    enabled: true
+  app:
+    name: omni-product-catalog
+    description: Product catalog service
+    version: 1.0.0
+  env:
+    enabled: true

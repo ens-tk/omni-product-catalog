@@ -1,13 +1,11 @@
 package org.example.service;
 
 import org.example.dto.CreateProductRequest;
-import org.example.dto.CreateProductResponse;
 import org.example.dto.UpdateProductRequest;
 import org.example.model.Product;
 import org.example.repository.ProductRepository;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.NoSuchElementException;
